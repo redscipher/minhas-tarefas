@@ -1,5 +1,5 @@
 // importacao do componente que cria estilos p/ pagina
-import { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 
 // estilo
 const EstiloGlobal = createGlobalStyle`
@@ -8,8 +8,15 @@ const EstiloGlobal = createGlobalStyle`
   padding: 0;
   box-sizing: border-box;
   font-family: Robot, sans-serif;
+  list-style: none;
 }
+`
+
+const Container = styled.div`
+  display: grid;
+  grid-template-columns: 224px auto;
 `
 
 // exportacao
 export default EstiloGlobal
+export { Container }
