@@ -1,4 +1,4 @@
-root = true
+root = true     #informa que este eh o arquivo .editorconfig principal: 'raiz'
 
 [*]
 indent_style = space

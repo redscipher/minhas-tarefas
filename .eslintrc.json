@@ -23,8 +23,9 @@
     "rules": {
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
-      "react/prop-types": "off",
-      "react/react-in-jsx-scope": "off",
+      //== configuracoes do typescript
+      "react/prop-types": "off",    // configuracao relacionado a tipagem de propriedades antes da utilizacao do typescript
+      "react/react-in-jsx-scope": "off",    // desativa obrigatoriedade de importacao do 'react' nos arquivos
       "@typescript-eslint/explicit-module-boundary-types": "off"
     },
     "settings": {
