@@ -47,12 +47,20 @@ const tarefasSlice = createSlice({
       estado.itens = [
         ...estado.itens.filter((tarefa) => tarefa.id !== acao.payload)
       ]
+    },
+    editar: (estado, acao: PayloadAction<Tarefa>) => {
+      // busca indice do registro selecionado
+      const idxTarefa = estado.itens.findIndex((t) => (t.id = acao.payload.id))
+      // salva valor passado no item do indice encontrado
+      if (idxTarefa >= 0) {
+        estado.itens[idxTarefa] = acao.payload
+      }
     }
   }
 })
 
 // exportacoes
 // acoes: reducers
-export const { remover } = tarefasSlice.actions
+export const { remover, editar } = tarefasSlice.actions
 // reducer
 export default tarefasSlice.reducer

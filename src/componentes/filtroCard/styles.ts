@@ -5,7 +5,8 @@ import { Props } from '.'
 
 // cria um subtipo baseado em um outro tipo de dados: p/ omitir propriedades que nao precisamos
 // sintaxe: Omit<nome_type, 'propriedades_emissao'>
-type PropsSimplificado = Omit<Props, 'contador' | 'legenda'>
+// type PropsSimplificado = Omit<Props, 'contador' | 'legenda' | 'criterio'>
+type PropsSimplificado = Pick<Props, 'ativo'>
 
 // passa entre '<>' as propriedades acessiveis dentro do objeto
 const Cartao = styled.div<PropsSimplificado>`
