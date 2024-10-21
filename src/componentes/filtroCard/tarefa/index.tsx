@@ -1,17 +1,18 @@
 import { useState } from 'react'
 import * as E from './styles'
-import * as enums from '../../../globais/enums'
+// import * as enums from '../../../globais/enums'
+import { useDispatch } from 'react-redux'
+// importa o redutor
+import { remover } from '../../../store/reducers/tarefas'
+import ClsTarefa from '../../../modelos/Tarefa'
 
-export type PropsTarefa = {
-  titulo: string
-  prioridade: enums.EPrioridade
-  status: enums.EStatus
-  descricao: string
-}
+export type PropsTarefa = ClsTarefa
 
-const Tarefa = ({ titulo, prioridade, status, descricao }: PropsTarefa) => {
+const Tarefa = ({ titulo, prioridade, estado, descricao, id }: PropsTarefa) => {
   // cria constante p/ controlar um estado dinamicamente
   const [estaEditando, setEstaEditando] = useState(false)
+  // cria o 'dispatch' que manda a informacao da mudanca de estado p/ a 'store'
+  const dispatch = useDispatch()
 
   // retorno
   return (
@@ -20,8 +21,8 @@ const Tarefa = ({ titulo, prioridade, status, descricao }: PropsTarefa) => {
       <E.Ponto parametro="prioridade" prioridade={prioridade}>
         {prioridade}
       </E.Ponto>
-      <E.Ponto parametro="status" status={status}>
-        {status}
+      <E.Ponto parametro="status" status={estado}>
+        {estado}
       </E.Ponto>
       <E.Descricao value={descricao}></E.Descricao>
       <E.BarraAcoes>
@@ -36,7 +37,9 @@ const Tarefa = ({ titulo, prioridade, status, descricao }: PropsTarefa) => {
         ) : (
           <>
             <E.Botao onClick={() => setEstaEditando(true)}>Editar</E.Botao>
-            <E.BotaoCancelar>Remover</E.BotaoCancelar>
+            <E.BotaoCancelar onClick={() => dispatch(remover(id))}>
+              Remover
+            </E.BotaoCancelar>
           </>
         )}
       </E.BarraAcoes>

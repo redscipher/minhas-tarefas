@@ -43,24 +43,25 @@ const ListaTarefas = () => {
   // buscando as tarefas sem desestruturar
   //const tarefas = useSelector((estado: RootReducer) => estado.tarefas)
   // busca as tarefas desestruturando
-  const { tarefas } = useSelector((estado: RootReducer) => estado)
+  const { itens } = useSelector((estado: RootReducer) => estado.tarefas)
 
   return (
     <ContainerTarefas>
-      {tarefas.length > 0 && (
+      {itens.length > 0 && (
         <>
           <p>2 tarefas marcadas como: "categoria" e "termo"</p>
           <ul>
             {/* renderiza os itens em loop */}
-            {tarefas.map((itemTarefa, i) => (
+            {itens.map((itemTarefa, i) => (
               // cria um item passando um ID como 'chave'
               <li key={i + ' - ' + itemTarefa.titulo}>
                 {/* tarefa atual */}
                 <Tarefa
                   descricao={itemTarefa.descricao}
                   prioridade={itemTarefa.prioridade}
-                  status={itemTarefa.estado}
+                  estado={itemTarefa.estado}
                   titulo={itemTarefa.titulo}
+                  id={itemTarefa.id}
                 ></Tarefa>
               </li>
             ))}
