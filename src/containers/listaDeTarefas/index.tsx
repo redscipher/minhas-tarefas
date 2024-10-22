@@ -1,7 +1,7 @@
 // import { useState } from 'react'
 import Tarefa from '../../componentes/filtroCard/tarefa' //{ PropsTarefa }
 import Tar from '../../modelos/Tarefa'
-import { ContainerTarefas } from './styles'
+import { ContainerTarefas, Resultado } from './styles'
 // import * as enums from '../../globais/enums'
 import { useSelector } from 'react-redux'
 import { RootReducer } from '../../store'
@@ -52,7 +52,7 @@ const ListaTarefas = () => {
   // funcoes
   function filtraTarefas(): Tar[] {
     let tarefasFiltradas = itens
-    if (termo) {
+    if (termo !== undefined) {
       tarefasFiltradas = tarefasFiltradas.filter(
         (item) => item.titulo.toLowerCase().search(termo.toLowerCase()) >= 0
       )
@@ -74,22 +74,25 @@ const ListaTarefas = () => {
     }
   }
 
+  const tarefas = filtraTarefas()
+
+  const exibeResultado = (qtd: number) => {
+    return `${qtd} tarefa(s) encontrada(s) como: "${criterio}"="${
+      valor === undefined ? 'normal' : valor
+    }"
+    ${termo !== undefined && termo.length > 0 ? ` e "${termo}"` : ''}`
+  }
+
+  const mensagem = exibeResultado(tarefas.length)
+
   return (
     <ContainerTarefas>
       {itens.length > 0 && (
         <>
-          <p>
-            {filtraTarefas().length} tarefa(s) marcada(s) como: "categoria" e "
-            {termo}"
-          </p>
-          <ul>
-            <li>{termo}</li>
-            <li>{criterio}</li>
-            <li>{valor}</li>
-          </ul>
+          <Resultado>{mensagem}</Resultado>
           <ul>
             {/* renderiza os itens em loop */}
-            {filtraTarefas().map((itemTarefa, i) => (
+            {tarefas.map((itemTarefa, i) => (
               // cria um item passando um ID como 'chave'
               <li key={i + ' - ' + itemTarefa.titulo}>
                 {/* tarefa atual */}

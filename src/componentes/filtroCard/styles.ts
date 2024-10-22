@@ -1,12 +1,11 @@
 import styled from 'styled-components'
 
-// importa tipos
-import { Props } from '.'
-
 // cria um subtipo baseado em um outro tipo de dados: p/ omitir propriedades que nao precisamos
 // sintaxe: Omit<nome_type, 'propriedades_emissao'>
-// type PropsSimplificado = Omit<Props, 'contador' | 'legenda' | 'criterio'>
-type PropsSimplificado = Pick<Props, 'ativo'>
+// type PropsSimplificado = Omit/Pick<Props, 'contador' | 'legenda' | 'criterio'>
+type PropsSimplificado = {
+  ativo: boolean
+}
 
 // passa entre '<>' as propriedades acessiveis dentro do objeto
 const Cartao = styled.div<PropsSimplificado>`
@@ -15,6 +14,7 @@ const Cartao = styled.div<PropsSimplificado>`
   background-color: ${(props) => (props.ativo ? '#fff' : '#fcfcfc')};
   color: ${(props) => (props.ativo ? '#1e90ff' : '#5e5e5e')};
   border-radius: 8px;
+  cursor: pointer;
 `
 
 const Contador = styled.div`

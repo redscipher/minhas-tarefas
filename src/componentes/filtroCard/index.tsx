@@ -5,19 +5,17 @@ import * as enums from '../../globais/enums'
 import { RootReducer } from '../../store'
 
 export type Props = {
-  ativo?: boolean
-  contador: number
   legenda: string
   criterio: 'prioridade' | 'status' | 'todas'
   valor?: enums.EPrioridade | enums.EStatus
 }
 
 // cria as propriedades como parametros
-const FiltroCartao = ({ ativo, contador, legenda, criterio, valor }: Props) => {
+const FiltroCartao = ({ legenda, criterio, valor }: Props) => {
   const dispatch = useDispatch()
 
   // busca o valor do estado
-  const { filtro } = useSelector((estado: RootReducer) => estado)
+  const { filtro, tarefas } = useSelector((estado: RootReducer) => estado)
 
   const verificaEstaAtivo = () => {
     const mesmoCrit = filtro.criterio === criterio
@@ -34,6 +32,18 @@ const FiltroCartao = ({ ativo, contador, legenda, criterio, valor }: Props) => {
       })
     )
   }
+
+  const contarTarefas = () => {
+    if (criterio === 'todas') return tarefas.itens.length
+    if (criterio === 'prioridade')
+      return tarefas.itens.filter((item) => item.prioridade === valor).length
+    if (criterio === 'status')
+      return tarefas.itens.filter((item) => item.estado === valor).length
+  }
+
+  const ativo = verificaEstaAtivo()
+
+  const contador = contarTarefas()
 
   return (
     <E.Cartao ativo={ativo} onClick={filtrar}>

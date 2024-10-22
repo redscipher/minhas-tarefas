@@ -1,16 +1,28 @@
 import { Provider } from 'react-redux'
-import BarraLateral from './containers/barraLateral'
-import ListaTarefas from './containers/listaDeTarefas'
 import EstiloGlobal, { Container } from './globais'
 import armazem from './store/index'
+
+// importacoes roteador
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import Inicial from './paginas/'
+
+const rotas = createBrowserRouter([
+  {
+    path: '/',
+    element: <Inicial></Inicial>
+  },
+  {
+    path: '/novo',
+    element: <h1>Nova tarefa</h1>
+  }
+])
 
 function App() {
   return (
     <Provider store={armazem}>
       <EstiloGlobal></EstiloGlobal>
       <Container>
-        <BarraLateral></BarraLateral>
-        <ListaTarefas></ListaTarefas>
+        <RouterProvider router={rotas}></RouterProvider>
       </Container>
     </Provider>
   )
