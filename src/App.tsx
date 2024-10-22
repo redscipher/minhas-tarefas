@@ -5,6 +5,7 @@ import armazem from './store/index'
 // importacoes roteador
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Inicial from './paginas/'
+import Cadastro from './paginas/cadastro'
 
 const rotas = createBrowserRouter([
   {
@@ -12,8 +13,8 @@ const rotas = createBrowserRouter([
     element: <Inicial></Inicial>
   },
   {
-    path: '/novo',
-    element: <h1>Nova tarefa</h1>
+    path: '/cadastro',
+    element: <Cadastro></Cadastro>
   }
 ])
 
