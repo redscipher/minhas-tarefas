@@ -1,7 +1,7 @@
 // import { useState } from 'react'
 import Tarefa from '../../componentes/filtroCard/tarefa' //{ PropsTarefa }
 import Tar from '../../modelos/Tarefa'
-import { ContainerTarefas, Resultado } from './styles'
+import { ContainerTarefas, Titulo } from '../../globais'
 // import * as enums from '../../globais/enums'
 import { useSelector } from 'react-redux'
 import { RootReducer } from '../../store'
@@ -89,22 +89,24 @@ const ListaTarefas = () => {
     <ContainerTarefas>
       {itens.length > 0 && (
         <>
-          <Resultado>{mensagem}</Resultado>
+          <Titulo as="p">{mensagem}</Titulo>
           <ul>
             {/* renderiza os itens em loop */}
-            {tarefas.map((itemTarefa, i) => (
-              // cria um item passando um ID como 'chave'
-              <li key={i + ' - ' + itemTarefa.titulo}>
-                {/* tarefa atual */}
-                <Tarefa
-                  descricao={itemTarefa.descricao}
-                  prioridade={itemTarefa.prioridade}
-                  estado={itemTarefa.estado}
-                  titulo={itemTarefa.titulo}
-                  id={itemTarefa.id}
-                ></Tarefa>
-              </li>
-            ))}
+            {tarefas.map((itemTarefa, i) => {
+              return (
+                // cria um item passando um ID como 'chave'
+                <li key={i + '-' + itemTarefa.titulo}>
+                  {/* tarefa atual */}
+                  <Tarefa
+                    descricao={itemTarefa.descricao}
+                    prioridade={itemTarefa.prioridade}
+                    estado={itemTarefa.estado}
+                    titulo={itemTarefa.titulo}
+                    id={itemTarefa.id}
+                  ></Tarefa>
+                </li>
+              )
+            })}
           </ul>
         </>
       )}

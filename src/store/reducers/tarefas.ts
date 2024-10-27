@@ -55,12 +55,44 @@ const tarefasSlice = createSlice({
       if (idxTarefa >= 0) {
         estado.itens[idxTarefa] = acao.payload
       }
+    },
+    cadastra: (estado, acao: PayloadAction<Omit<Tarefa, 'id'>>) => {
+      // busca na lista de tarefas existe se ja existe alguma tarefa com o titulo = ao que foi passado p/ acao do armazem
+      const TarefaExiste = estado.itens.find(
+        (tarefa) =>
+          tarefa.titulo.toLocaleLowerCase() ===
+          acao.payload.titulo.toLocaleLowerCase()
+      )
+
+      if (TarefaExiste) {
+        alert('Tarefa ja existe')
+      } else {
+        const ultimaTarefa = estado.itens[estado.itens.length - 1]
+        const tarefaNova = {
+          ...acao.payload,
+          id: ultimaTarefa ? ultimaTarefa.id + 1 : 1
+        }
+        estado.itens.push(tarefaNova)
+      }
+    },
+    alteraStatus: (
+      estado,
+      acao: PayloadAction<{ id: number; finalizado: boolean }>
+    ) => {
+      // busca indice do registro selecionado
+      const idxTarefa = estado.itens.findIndex((t) => t.id === acao.payload.id)
+      // salva valor passado no item do indice encontrado
+      if (idxTarefa >= 0) {
+        estado.itens[idxTarefa].estado = acao.payload.finalizado
+          ? enums.EStatus.CONCLUIDO
+          : enums.EStatus.PENDENTE
+      }
     }
   }
 })
 
 // exportacoes
 // acoes: reducers
-export const { remover, editar } = tarefasSlice.actions
+export const { remover, editar, cadastra, alteraStatus } = tarefasSlice.actions
 // reducer
 export default tarefasSlice.reducer

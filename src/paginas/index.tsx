@@ -5,7 +5,7 @@ import ListaTarefas from '../containers/listaDeTarefas'
 const Inicial = () => {
   return (
     <>
-      <BarraLateral></BarraLateral>
+      <BarraLateral mostrarFiltros></BarraLateral>
       <ListaTarefas></ListaTarefas>
       <BotaoAdicionar></BotaoAdicionar>
     </>

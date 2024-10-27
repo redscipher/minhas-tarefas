@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import * as enums from '../../../globais/enums'
 import cores from '../../../globais/cores'
+import { Botao } from '../../../globais'
 
 // tipos
 type PropsPonto = {
@@ -28,12 +29,18 @@ const Cartao = styled.div`
   padding: 16px;
   margin-bottom: 32px;
   border-radius: 16px;
+
+  label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+  }
 `
 
 const Titulo = styled.h3`
   font-size: 18px;
   font-weight: bold;
-  margin-bottom: 16px;
+  margin-left: 8px;
 `
 
 const Ponto = styled.span<PropsPonto>`
@@ -66,34 +73,9 @@ const BarraAcoes = styled.div`
   padding-top: 16px;
 `
 
-const Botao = styled.button`
-  color: #fff;
-  font-size: 12px;
-  font-weight: bold;
-  padding: 8px 12px;
-  border: none;
-  cursor: pointer;
-  background-color: #2f3640;
-  border-radius: 8px;
-  margin-right: 8px;
-`
-
-const BotaoSalvar = styled(Botao)`
-  background-color: ${cores.verde};
-`
-
 const BotaoCancelar = styled(Botao)`
   background-color: ${cores.vermelho};
 `
 
 // exporta botoes
-export {
-  Cartao,
-  Titulo,
-  Ponto,
-  Descricao,
-  BarraAcoes,
-  Botao,
-  BotaoSalvar,
-  BotaoCancelar
-}
+export { Cartao, Titulo, Ponto, Descricao, BarraAcoes, BotaoCancelar }

@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import * as E from './styles'
 // import * as enums from '../../../globais/enums'
 import { useDispatch } from 'react-redux'
 // importa o redutor
-import { remover, editar } from '../../../store/reducers/tarefas'
+import { remover, editar, alteraStatus } from '../../../store/reducers/tarefas'
 import ClsTarefa from '../../../modelos/Tarefa'
+import { Botao, BotaoSalvar } from '../../../globais'
+import * as enums from '../../../globais/enums'
 
 export type PropsTarefa = ClsTarefa
 
@@ -25,10 +27,25 @@ const Tarefa = ({ titulo, prioridade, estado, descricao, id }: PropsTarefa) => {
     setDescAreaTexto(descricao)
   }
 
+  function alteraStatusTarefa(evento: ChangeEvent<HTMLInputElement>) {
+    dispatch(alteraStatus({ id, finalizado: evento.target.checked }))
+  }
+
   // retorno
   return (
     <E.Cartao>
-      <E.Titulo>{titulo}</E.Titulo>
+      <label htmlFor={titulo}>
+        <input
+          type="checkbox"
+          checked={estado === enums.EStatus.CONCLUIDO}
+          id={titulo}
+          onChange={alteraStatusTarefa}
+        />
+        <E.Titulo>
+          {estaEditando && <em>Editando: </em>}
+          {titulo}
+        </E.Titulo>
+      </label>
       <E.Ponto parametro="prioridade" prioridade={prioridade}>
         {prioridade}
       </E.Ponto>
@@ -44,7 +61,7 @@ const Tarefa = ({ titulo, prioridade, estado, descricao, id }: PropsTarefa) => {
         {/* controle de renderizacao: if */}
         {estaEditando ? (
           <>
-            <E.BotaoSalvar
+            <BotaoSalvar
               onClick={() => {
                 dispatch(
                   editar({
@@ -58,12 +75,12 @@ const Tarefa = ({ titulo, prioridade, estado, descricao, id }: PropsTarefa) => {
               }}
             >
               Salvar
-            </E.BotaoSalvar>
+            </BotaoSalvar>
             <E.BotaoCancelar onClick={CancelarEdicao}>Cancelar</E.BotaoCancelar>
           </>
         ) : (
           <>
-            <E.Botao onClick={() => setEstaEditando(true)}>Editar</E.Botao>
+            <Botao onClick={() => setEstaEditando(true)}>Editar</Botao>
             <E.BotaoCancelar onClick={() => dispatch(remover(id))}>
               Remover
             </E.BotaoCancelar>

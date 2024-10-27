@@ -13,14 +13,4 @@ const Filtros = styled.div`
   margin-top: 16px;
 `
 
-const Campo = styled.input`
-  color: #666666;
-  padding: 8px;
-  background-color: #fff;
-  border-radius: 8px;
-  font-weight: bold;
-  border-color: #666666;
-  width: 100%;
-`
-
-export { Aside, Filtros, Campo }
+export { Aside, Filtros }
