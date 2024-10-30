@@ -24,7 +24,7 @@ function retornaCorFundo(props: PropsPonto): string {
 
 // constantes css
 const Cartao = styled.div`
-  background-color: ##fcfcfc;
+  background-color: #fcfcfc;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   padding: 16px;
   margin-bottom: 32px;
@@ -65,7 +65,7 @@ const Descricao = styled.textarea`
   margin-top: 16px;
   resize: none;
   border: none;
-  background-color: transparent;e
+  background-color: transparent;
 `
 
 const BarraAcoes = styled.div`
